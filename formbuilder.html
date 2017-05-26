@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Form builder</title>
+
+    <!-- Bootstrap -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom -->
+    <link href="formbuilder.css" rel="stylesheet">
+    <link href="formbuilder-theme.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]><script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script><script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+  </head>
+  <body>
+
+    <div class="grid">
+
+      <header class="header">
+        <h1>Editor de formulario</h1>
+      </header>
+
+      <main class="main">
+
+        <section class="cell">
+          <h2>Campos disponibles<small id="available_alerts"></small></h2>
+          <div class="fieldset-panel" id="available_wrapper">
+            <fieldset dropable class="hidden-aux" id="placeholder_wrapper"></fieldset>
+          </div>
+        </section>
+
+        <section class="cell">
+          <h2>Campos seleccionados</h2>
+          <div class="fieldset-panel" id="selected_wrapper">
+            <fieldset dropable id="submit_wrapper">
+              <span type="submit" value="Submit" resetable="prompt" class="btn btn-primary">Submit</span>
+            </fieldset>
+          </div>
+        </section>
+
+        <section class="cell-span-2 text-right flex-justify-around">
+          <button class="btn btn-lg btn-primary" onclick="defParser().getSchema()">Guardar y validar</button>
+        </section>
+
+      </main>
+
+      <footer class="footer">
+
+        <div class="footer-cell console">
+          <h4 class="console-title">Console</h4>
+          <div class="console-inner"></div>
+        </div>
+
+        <div class="footer-cell tasks">
+          <h4 class="tasks-title">Tareas pendientes:</h4>
+          <div class="tasks-inner">
+            <ol class="text-columns-3">
+              <li><b>Exportar configuración a JSON</b></li>
+              <li><quote><em>Lorem Ipsum</em> es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años, sino que tambien ingresó como texto de relleno en documentos electrónicos, quedando esencialmente igual al original. Fue popularizado en los 60s con la creación de las hojas "Letraset", las cuales contenian pasajes de Lorem Ipsum, y más recientemente con software de autoedición, como por ejemplo Aldus PageMaker, el cual incluye versiones de Lorem Ipsum.</quote></li>
+              <li>
+                <figure>
+                  <img src="https://placehold.it/320x200/" alt="Gray background color placeholder for 320px width 200px height image" style="max-width: 100%;">
+                  <figcaption><small>Source: <a href="http://placehold.it"><i>Placehold.it</i></a></small></figcaption>
+                </figure>
+              </li>
+            </ol>
+          </div>
+        </div>
+
+      </footer>
+
+    </div>
+
+    <!-- CONTEXT MENU -->
+
+    <style>
+      .context-menu {
+        display: none;
+        position: absolute;
+        z-index: 10;
+        background: yellow;
+      }
+
+      .context-menu--active {
+        display: block;
+      }
+    </style>
+
+    <nav class="context-menu" id="context-menu">
+      <div class="context-menu__items">
+        <div class="context-menu__item" data-resetable="name"><b>Name:</b> <span class="context-menu__value"></span></div>
+        <div class="context-menu__item" data-resetable="label"><b>Label:</b> <span class="context-menu__value"></span></div>
+        <div class="context-menu__item" data-resetable="placeholder"><b>Placeholder:</b> <span class="context-menu__value"></span></div>
+      </div>
+    </nav>
+
+    <!-- SCRIPTS -->
+
+    <script src="formbuilder-1-defs.js"></script>
+    <script src="formbuilder-3-parser.js"></script>
+    <script src="formbuilder-5-dnd.js"></script>
+    <script src="formbuilder-9-editResetables.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        defParser(FIELDS);
+        defParser.original = defParser().getSchema();
+
+        editResetables.init('[resetable]');
+        DnD.init(
+          'fieldset[draggable]',
+          'fieldset[dropable]',
+          'moveBefore',
+          {
+            afterDrop: () => {
+              available_alerts.textContent = available_wrapper
+                .querySelectorAll('fieldset[required]').length ? 'Required inside' : ''
+            }
+          }
+        )
+      });
+    </script>
+  </body>
+</html>

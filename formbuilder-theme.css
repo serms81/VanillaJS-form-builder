@@ -1,0 +1,37 @@
+/* DRY CSS, per rule */
+
+/* BG-COLOR */
+
+#BG-COLOR-333,
+.grid {
+  background-color: #333;
+}
+
+#BG-COLOR-DDD,
+.main {
+  background-color: #ddd;
+}
+
+#BG-COLOR-FFF,
+.footer {
+  background-color: #fff;
+}
+
+#BG-COLOR-RGBA-127-127-127-50,
+.footer h4 {
+  background-color: rgba(127, 127, 127, .5);
+}
+
+/* COLOR */
+
+#COLOR-RGBA-255-255-255-90,
+.header,
+.footer {
+  color: rgba(255, 255, 255, .9);
+}
+
+#COLOR-RGBA-0-0-0-50,
+.footer h4,
+.footer li {
+  color: rgba(0, 0, 0, .5);
+}

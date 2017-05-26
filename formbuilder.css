@@ -1,0 +1,210 @@
+label,
+input,
+select {
+  display: block;
+  background: #fff;
+}
+textarea {
+  width: calc(100% - 40px);
+}
+input[type=checkbox],
+input[type=radio] {
+  display: inline;
+}
+input[type=checkbox] + label,
+input[type=radio] + label {
+  display: inline;
+}
+
+fieldset[data-modified] {
+  border-left: 3px solid #fc6;
+}
+
+fieldset::before {
+  content: '✎';
+  display: none;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: flex-end;
+  position: absolute;
+  top: 0;
+  left: -3px;
+  width: 3px;
+  height: 100%;
+  font-size: 2rem;
+  color: #666;
+  cursor: default;
+}
+
+fieldset[data-modified]::before {
+  display: flex;
+}
+
+[resetable]:hover {
+  box-shadow: 0 0 3px 1px #0c0;
+  opacity: .9;
+}
+
+fieldset {
+  position: relative;
+  padding: 5px;
+  border: 1px dotted;
+}
+
+fieldset[pattern] {
+  background: #666;
+}
+
+fieldset[draggable]:hover {
+  background: rgba(127,127,127,.1);
+  cursor: move;
+}
+
+fieldset:not([draggable]) > *,
+fieldset[draggable] > * {
+  cursor: default;
+  margin-right: 40px;
+}
+
+fieldset[draggable].dragged {
+  opacity: .9;
+  transform: scale(.9);
+  cursor: progress;
+}
+
+fieldset:not([draggable]) > * {
+  margin-right: 100px;
+}
+
+.fieldset-panel {
+  border: 3px dotted #0cf;
+  background: #fff;
+}
+
+.fieldset-panel#available_wrapper {
+  border-color: #fc0;
+}
+
+#available_wrapper fieldset[required] {
+  border-color: #f00;
+  border-style: solid;
+}
+
+fieldset[required] label::after {
+  content: '*';
+  color: #f00;
+}
+
+.fieldset-panel [dropable],
+.hidden-aux {
+  min-height: 40px;
+}
+
+.fieldset-panel [dropable].over {
+  border-top: 2px solid #f00;
+  margin-top: 10px;
+}
+
+.fieldset-panel.not-dropable fieldset:not[draggable] {
+  border: none;
+  outline: none;
+  margin-bottom: 50px;
+}
+
+.fieldset-panel fieldset:not[draggable] ~ fieldset {
+  opacity: .5;
+}
+
+.grid,
+.main {
+  display: grid;
+  grid-template-columns: [very-left] 1fr [very-middle] 1fr [very-right];
+  grid-gap: 1rem;
+  padding: 1rem;
+}
+
+.grid {
+  grid-template-rows: [header-top] auto [main-start] 1fr [main-end] auto [footer-bottom];
+}
+
+.main {
+  grid-row-start: main-start;
+  grid-row-end: main-end;
+  grid-column-start: very-left;
+  grid-column-end: very-right;
+}
+
+.header,
+.footer,
+.cell-span-2 {
+  grid-column-start: very-left;
+  grid-column-end: very-right;
+}
+
+.footer {
+  padding-top: 1.33em;
+}
+
+.text-columns-2 {
+  columns: 2;
+  column-gap: 3em;
+}
+
+.text-columns-3 {
+  columns: 3;
+  column-gap: 3em;
+  padding-right: 1.5em;
+  padding-left: 1.5em;
+}
+
+.footer-cell {
+  margin-bottom: 2em;
+}
+
+.footer h4 {
+  margin-top: -1em;
+  padding: .67em .33em .33em;
+  background: rgba(127, 127, 127, .5);
+}
+
+.footer h4,
+.footer li {
+  color: rgba(0, 0, 0, .5);
+}
+
+.footer ol {
+  padding-left: 3em;
+}
+
+.footer li {
+  margin-bottom: 1em;
+}
+
+.fieldset-panel {
+  grid-row-start: main-start;
+  grid-row-end: main-end;
+  grid-column-start: very-left;
+  grid-column-end: very-middle;
+}
+
+.tasks-inner {
+  font-family: serif;
+  text-align: justify;
+}
+
+.console-inner {
+  max-height: 15em;
+  overflow-y: auto;
+  padding: 0 .5em;
+  background-color: #000;
+  color: #0f0;
+  font-family: courier new;
+  font-size: .9em;
+  line-height: 2;
+}
+
+.console-inner p {
+  margin: 0;
+  padding-left: 10px;
+  text-indent: -10px;
+}
